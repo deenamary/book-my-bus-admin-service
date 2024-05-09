@@ -19,12 +19,9 @@ public class BusRouteController {
 
 
     @PostMapping("add/busroute")
-    public ResponseEntity<BusRoute> createOrder(@RequestBody BusRoute busRoute)
+    public ResponseEntity<BusRoute> addBusRoute(@RequestBody BusRoute busRoute)
     {
         busRoute.setBusId(String.valueOf(UUID.randomUUID()));
-        busRoute.setSource(busRoute.getSource());
-        busRoute.setDestination(busRoute.getDestination());
-        busRoute.setPrice(busRoute.getPrice());
         busRouteRepository.save(busRoute);
 
         return ResponseEntity.ok(busRoute);
@@ -35,5 +32,20 @@ public class BusRouteController {
     {
         List<BusRoute> busRoutes = busRouteRepository.findAll();
         return ResponseEntity.ok(busRoutes);
+    }
+
+    @PutMapping("update/busroute")
+    public ResponseEntity<BusRoute> updateBusRoute(@RequestBody BusRoute busRoute)
+    {
+        busRouteRepository.save(busRoute);
+
+        return ResponseEntity.ok(busRoute);
+    }
+
+    @DeleteMapping("delete/busroute/{busid}")
+    public ResponseEntity<String> deleteBusRoute(@PathVariable String busid)
+    {
+        busRouteRepository.deleteById(busid);
+        return ResponseEntity.ok().body("Deleted successfully");
     }
 }
