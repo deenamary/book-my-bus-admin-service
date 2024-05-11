@@ -22,6 +22,9 @@ public class BusRoute {
     @Column(name = "price")
     private Integer price;
 
+    @Column(name = "totalseats")
+    private Integer totalSeats;
+
     public String getBusId() {
         return busId;
     }
@@ -55,4 +58,11 @@ public class BusRoute {
         this.price = price;
     }
 
+    public Integer getTotalSeats() {
+        return totalSeats;
+    }
+
+    public void setTotalSeats(Integer totalSeats) {
+        this.totalSeats = totalSeats;
+    }
 }

@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -47,5 +48,12 @@ public class BusRouteController {
     {
         busRouteRepository.deleteById(busid);
         return ResponseEntity.ok().body("Deleted successfully");
+    }
+
+    @GetMapping("get/busroute/{busid}")
+        public ResponseEntity<BusRoute> getBusRoute(@PathVariable String busid)
+    {
+        Optional<BusRoute> busRoute = busRouteRepository.findById(busid);
+        return busRoute.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
